@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <title>Seguimiento de Requerimientos</title>
+</head>
+<body class="bg-gray-50 p-6">
+  <div class="max-w-7xl mx-auto">
+    <h1 class="text-2xl font-bold mb-4 text-center">Tabla de Seguimiento de Requerimientos</h1>
+    <input type="file" id="fileInput" class="mb-4" accept=".xlsx, .xls" />
+
+    <div class="mb-4">
+      <h2 class="text-lg font-semibold mb-2">Agregar nuevo requerimiento</h2>
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-2">
+        <input id="nuevoID" placeholder="ID" class="border p-2 rounded">
+        <input id="nuevoReq" placeholder="Requerimiento" class="border p-2 rounded">
+        <input id="nuevoDesc" placeholder="Descripción" class="border p-2 rounded">
+        <select id="nuevoPrio" class="border p-2 rounded">
+          <option value="Alta">Alta</option>
+          <option value="Media">Media</option>
+          <option value="Baja">Baja</option>
+        </select>
+        <select id="nuevoEstado" class="border p-2 rounded">
+          <option value="Asignado">Asignado</option>
+          <option value="Realizado">Realizado</option>
+          <option value="Terminado">Terminado</option>
+          <option value="No iniciado">No iniciado</option>
+        </select>
+      </div>
+      <button onclick="agregarRequerimiento()" class="mt-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">Agregar Requerimiento</button>
+    </div>
+
+    <table class="min-w-full bg-white shadow rounded-lg overflow-hidden">
+      <thead class="bg-gray-100">
+        <tr>
+          <th class="px-4 py-2">ID</th>
+          <th class="px-4 py-2">Requerimiento</th>
+          <th class="px-4 py-2">Descripción</th>
+          <th class="px-4 py-2">Prioridad</th>
+          <th class="px-4 py-2">Estado</th>
+          <th class="px-4 py-2 text-center">Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+
+    <button onclick="guardarTabla()" class="mt-4 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded">Guardar Tabla</button>
+  </div>
+
+  <script>
+    const prioridades = {
+      'Alta': 'bg-red-200 text-red-800 font-semibold px-2 py-1 rounded text-center',
+      'Media': 'bg-yellow-200 text-yellow-800 font-semibold px-2 py-1 rounded text-center',
+      'Baja': 'bg-green-200 text-green-800 font-semibold px-2 py-1 rounded text-center'
+    };
+
+    const estados = {
+      'Realizado': 'bg-blue-300 text-blue-900 font-semibold px-2 py-1 rounded text-center',
+      'Asignado': 'bg-yellow-300 text-yellow-900 font-semibold px-2 py-1 rounded text-center',
+      'Terminado': 'bg-green-300 text-green-900 font-semibold px-2 py-1 rounded text-center',
+      'No iniciado': 'bg-gray-300 text-gray-900 font-semibold px-2 py-1 rounded text-center'
+    };
+
+    let data = [];
+    const tableBody = document.getElementById("tableBody");
+    const fileInput = document.getElementById("fileInput");
+
+    fileInput.addEventListener("change", (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const workbook = XLSX.read(event.target.result, { type: "binary" });
+        const sheetName = workbook.SheetNames[0];
+        const sheet = workbook.Sheets[sheetName];
+        const jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+        data = jsonData.slice(1); // Omitir encabezado
+        cargarTabla();
+      };
+      reader.readAsBinaryString(file);
+    });
+
+    function cargarTabla() {
+      tableBody.innerHTML = "";
+      data.forEach((fila, index) => {
+        if (!fila[0]) return;
+
+        const prioridad = fila[3]?.trim();
+        const estado = fila[4]?.trim();
+
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td class="px-4 py-2">${fila[0]}</td>
+          <td class="px-4 py-2">${fila[1]}</td>
+          <td class="px-4 py-2">${fila[2]}</td>
+          <td class="px-4 py-2"><span class='${prioridades[prioridad] || 'bg-gray-100'}'>${prioridad}</span></td>
+          <td class="px-4 py-2"><span class='${estados[estado] || 'bg-gray-100'}'>${estado}</span></td>
+          <td class="px-4 py-2 text-center">
+            <div class="flex justify-center gap-2 items-center">
+              <button onclick="editarFila(${index})" class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded-full" title="Editar">✏️</button>
+              <button onclick="eliminarFila(${index})" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-full" title="Eliminar">🗑️</button>
+            </div>
+          </td>`;
+        tableBody.appendChild(row);
+      });
+    }
+
+    function editarFila(index) {
+      Swal.fire({
+        title: 'Editar Requerimiento',
+        html:
+          `<input id="swalPrioridad" class="swal2-input" placeholder="Prioridad" value="${data[index][3]}">
+           <input id="swalEstado" class="swal2-input" placeholder="Estado" value="${data[index][4]}" >`,
+        confirmButtonText: 'Actualizar',
+        focusConfirm: false,
+        preConfirm: () => {
+          const prioridad = document.getElementById('swalPrioridad').value;
+          const estado = document.getElementById('swalEstado').value;
+          if (!prioridad || !estado) {
+            Swal.showValidationMessage('Todos los campos son obligatorios');
+          }
+          return { prioridad, estado };
+        }
+      }).then((result) => {
+        if (result.isConfirmed) {
+          data[index][3] = result.value.prioridad;
+          data[index][4] = result.value.estado;
+          cargarTabla();
+        }
+      });
+    }
+
+    function eliminarFila(index) {
+      Swal.fire({
+        title: '¿Estás seguro?',
+        text: 'Esta acción no se puede deshacer.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'Cancelar'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          data.splice(index, 1);
+          cargarTabla();
+        }
+      });
+    }
+
+    function guardarTabla() {
+      const wb = XLSX.utils.book_new();
+      const wsData = [["ID", "Requerimiento", "Descripción", "Prioridad", "Estado"], ...data];
+      const ws = XLSX.utils.aoa_to_sheet(wsData);
+      XLSX.utils.book_append_sheet(wb, ws, "Requerimientos");
+      XLSX.writeFile(wb, "tabla_requerimientos.xlsx");
+    }
+
+    function agregarRequerimiento() {
+      const id = document.getElementById('nuevoID').value.trim();
+      const req = document.getElementById('nuevoReq').value.trim();
+      const desc = document.getElementById('nuevoDesc').value.trim();
+      const prio = document.getElementById('nuevoPrio').value;
+      const estado = document.getElementById('nuevoEstado').value;
+      if (!id || !req || !desc) {
+        alert("Por favor completa todos los campos.");
+        return;
+      }
+      data.push([id, req, desc, prio, estado]);
+      cargarTabla();
+      document.getElementById('nuevoID').value = "";
+      document.getElementById('nuevoReq').value = "";
+      document.getElementById('nuevoDesc').value = "";
+    }
+  </script>
+</body>
+</html>

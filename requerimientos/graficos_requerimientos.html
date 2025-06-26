@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <title>Informe de Requerimientos</title>
+</head>
+<body class="bg-gray-100 min-h-screen p-6">
+  <div class="max-w-6xl mx-auto bg-white p-6 rounded-xl shadow-lg">
+    <h1 class="text-3xl font-bold text-center mb-8 text-gray-800">Informe Gráfico de Requerimientos</h1>
+
+    <div class="mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Cargar archivo Excel (.xlsx):</label>
+        <input type="file" id="archivoExcel" accept=".xlsx" class="block w-full text-sm text-gray-600 border border-gray-300 rounded-md p-2" />
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">O cargar desde ruta (requerimientos.xlsx):</label>
+        <button onclick="cargarDesdeRuta()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">Cargar desde ruta</button>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="bg-gray-50 p-4 rounded shadow">
+        <h2 class="text-xl font-semibold text-center mb-4 text-blue-700">Distribución por Estado</h2>
+        <canvas id="graficoEstados" class="w-full h-64"></canvas>
+      </div>
+
+      <div class="bg-gray-50 p-4 rounded shadow">
+        <h2 class="text-xl font-semibold text-center mb-4 text-green-700">Distribución por Prioridad</h2>
+        <canvas id="graficoPrioridades" class="w-full h-64"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const leerArchivo = (data) => {
+      const workbook = XLSX.read(data, { type: 'binary' });
+      const hoja = workbook.Sheets[workbook.SheetNames[0]];
+      const json = XLSX.utils.sheet_to_json(hoja, { header: 1 });
+      procesarDatos(json);
+    };
+
+    document.getElementById('archivoExcel').addEventListener('change', function (e) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        leerArchivo(e.target.result);
+      };
+      reader.readAsBinaryString(e.target.files[0]);
+    });
+
+    function cargarDesdeRuta() {
+      fetch('requerimientos.xlsx')
+        .then(res => res.arrayBuffer())
+        .then(buffer => {
+          const data = new Uint8Array(buffer);
+          const workbook = XLSX.read(data, { type: 'array' });
+          const hoja = workbook.Sheets[workbook.SheetNames[0]];
+          const json = XLSX.utils.sheet_to_json(hoja, { header: 1 });
+          procesarDatos(json);
+        });
+    }
+
+    function procesarDatos(datos) {
+      const prioridades = {};
+      const estados = {};
+
+      for (let i = 1; i < datos.length; i++) {
+        const fila = datos[i];
+        const prioridad = fila[3];
+        const estado = fila[4];
+        if (!prioridad || !estado) continue;
+        prioridades[prioridad] = (prioridades[prioridad] || 0) + 1;
+        estados[estado] = (estados[estado] || 0) + 1;
+      }
+
+      generarGraficos(estados, prioridades);
+    }
+
+    let graficoEstados, graficoPrioridades;
+
+    function generarGraficos(estados, prioridades) {
+      if (graficoEstados) graficoEstados.destroy();
+      if (graficoPrioridades) graficoPrioridades.destroy();
+
+      graficoEstados = new Chart(document.getElementById('graficoEstados'), {
+        type: 'bar',
+        data: {
+          labels: Object.keys(estados),
+          datasets: [{
+            label: 'Cantidad',
+            data: Object.values(estados),
+            backgroundColor: ['#facc15', '#60a5fa', '#34d399', '#9ca3af'],
+            borderRadius: 6
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { display: false }
+          }
+        }
+      });
+
+      graficoPrioridades = new Chart(document.getElementById('graficoPrioridades'), {
+        type: 'pie',
+        data: {
+          labels: Object.keys(prioridades),
+          datasets: [{
+            label: 'Cantidad',
+            data: Object.values(prioridades),
+            backgroundColor: ['#ef4444', '#fbbf24', '#10b981'],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: { color: '#374151', font: { size: 14 } }
+            }
+          }
+        }
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Portafolio SPA con Node.js</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      overflow-x: hidden; /* Evita el scroll horizontal al abrir el menú */
+      display: flex; /* Añadido para layout con footer pegado abajo */
+      flex-direction: column; /* Contenido en columna para el footer */
+      min-height: 100vh; /* Asegura que el body ocupe al menos toda la altura de la ventana */
+    }
+    #menu {
+      position: fixed;
+      top: 60px; /* Debajo del encabezado fijo */
+      left: 0;
+      height: calc(100% - 60px);
+      width: 250px;
+      background-color: white;
+      padding: 1rem;
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+      transform: translateX(-100%); /* Oculto por defecto en móviles */
+      transition: transform 0.3s ease-in-out;
+      z-index: 20; /* Asegura que el menú esté por encima del contenido */
+      overflow-y: auto; /* Permite scroll si el contenido del menú es largo */
+    }
+    #menu.active {
+      transform: translateX(0); /* Visible */
+    }
+    .main-content-area { /* Contenedor para el contenido dinámico */
+      margin-left: 0; /* Sin margen por defecto */
+      transition: margin-left 0.3s ease-in-out;
+      padding-top: 80px; /* Espacio para el encabezado fijo */
+      flex-grow: 1; /* Permite que el contenido ocupe el espacio disponible y empuje el footer */
+    }
+    @media (min-width: 768px) {
+      #menu {
+        transform: translateX(0); /* Siempre visible en desktop */
+        position: fixed; /* Asegura que siga siendo flotante en desktop */
+      }
+      .main-content-area {
+        margin-left: 250px; /* Empuja el contenido cuando el menú es visible */
+      }
+      #menu-toggle {
+        display: none; /* Oculta el botón de alternancia en desktop */
+      }
+    }
+    .footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      width: 100%;
+      box-sizing: border-box; /* Incluye padding en el ancho */
+      /* Posicionamiento en mobile y desktop para estar al final */
+      margin-top: auto; /* Empuja el footer hacia abajo si el contenido no llena la pantalla */
+    }
+    @media (min-width: 768px) {
+      .footer {
+        margin-left: 250px; /* Empuja el footer en desktop también */
+        width: calc(100% - 250px);
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-100">
+
+  <div class="p-4 bg-indigo-600 text-white flex items-center justify-between fixed w-full z-30">
+    <div class="flex items-center gap-3">
+      <img src="https://via.placeholder.com/40" alt="Logo" class="w-10 h-10 rounded-full">
+      <span class="text-xl font-semibold">Mi Portafolio</span>
+    </div>
+    <button id="menu-toggle" class="md:hidden">
+      <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+    </button>
+  </div>
+
+  <nav id="menu" class="shadow-lg">
+    <ul class="space-y-4">
+
+      <li>
+        <button onclick="loadSection('inicio.html')" class="w-full text-left font-medium hover:text-indigo-600">
+          🏠 Inicio
+        </button>
+      </li>
+
+      <li class="group">
+        <details>
+          <summary class="cursor-pointer font-medium hover:text-indigo-600">💼 Servicios (Portafolio)</summary>
+          <ul class="pl-4 mt-2 space-y-1 text-sm text-gray-700">
+            <li><button onclick="loadSection('frontend.html')">↳ Desarrollo Frontend</button></li>
+            <li><button onclick="loadSection('soporte.html')">↳ Soporte Técnico</button></li>
+            <li><button onclick="loadSection('diseno.html')">↳ Diseño UX/UI</button></li>
+          </ul>
+        </details>
+      </li>
+
+      <li class="group">
+        <details>
+          <summary class="cursor-pointer font-medium hover:text-indigo-600">📊 Análisis de Mercado</summary>
+          <ul class="pl-4 mt-2 space-y-1 text-sm text-gray-700">
+            <li><button onclick="loadSection('problema.html')">↳ Problema detectado</button></li>
+            <li><button onclick="loadSection('publico.html')">↳ Público Objetivo</button></li>
+            <li><button onclick="loadSection('competencia.html')">↳ Competencia</button></li>
+          </ul>
+        </details>
+      </li>
+
+      <li class="group">
+        <details>
+          <summary class="cursor-pointer font-medium hover:text-indigo-600">💰 Cotización del Proyecto</summary>
+          <ul class="pl-4 mt-2 space-y-1 text-sm text-gray-700">
+            <li><button onclick="loadSection('sueldos.html')">↳ Sueldos por rol</button></li>
+            <li><button onclick="loadSection('hosting.html')">↳ Costos de dominio y hosting</button></li>
+            <li><button onclick="loadSection('valor.html')">↳ Valor final estimado</button></li>
+          </ul>
+        </details>
+      </li>
+
+      <li class="group">
+        <details>
+          <summary class="cursor-pointer font-medium hover:text-indigo-600">📄 Documentación Técnica</summary>
+          <ul class="pl-4 mt-2 space-y-1 text-sm text-gray-700">
+            <li><button onclick="loadSection('funcionales.html')">↳ Requerimientos Funcionales</button></li>
+            <li><button onclick="loadSection('no-funcionales.html')">↳ No Funcionales</button></li>
+            <li><button onclick="loadSection('problemas.html')">↳ Problemas y Soluciones</button></li>
+            <li><button onclick="loadSection('scrum.html')">↳ Roles y SCRUM</button></li>
+          </ul>
+        </details>
+      </li>
+
+      <li class="group">
+        <details>
+          <summary class="cursor-pointer font-medium hover:text-indigo-600">📞 Contacto</summary>
+          <ul class="pl-4 mt-2 space-y-1 text-sm text-gray-700">
+            <li><button onclick="loadSection('formulario.html')">↳ Formulario de contacto</button></li>
+            <li><button onclick="loadSection('redes.html')">↳ Redes sociales (simuladas)</button></li>
+          </ul>
+        </details>
+      </li>
+
+    </ul>
+  </nav>
+
+<main id="content-container" class="main-content-area px-6 sm:px-12 pt-28 pb-12">
+
+
+    <h2 class="text-2xl font-bold text-indigo-600 mb-2">Cargando...</h2>
+    <p class="text-gray-700">Por favor, espera mientras se carga el contenido.</p>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2025 Mi Portafolio. Todos los derechos reservados.</p>
+  </footer>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
