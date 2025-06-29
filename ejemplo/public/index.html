@@ -4,8 +4,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portafolio SPA con Node.js</title>
+  <title>Portafolio Aray</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" href="img/logoAray.png" type="image/x-icon">
   <style>
     body {
       overflow-x: hidden;
@@ -147,10 +148,25 @@
         <details>
           <summary class="cursor-pointer font-medium hover:text-morado">📄 Documentación Técnica</summary>
           <ul class="pl-4 mt-2 space-y-1 text-sm text-gray-700">
+            <li><button onclick="loadSection('./componentes/documentacion/problematica.html')">↳ Problematica</button>
+            </li>
+            <li><button onclick="loadSection('./componentes/documentacion/solucion.html')">↳ Solución</button></li>
+            <li><button onclick="loadSection('./componentes/documentacion/objetivos.html')">↳ Objetivo general y
+                especificos</button></li>
             <li><button onclick="loadSection('./componentes/documentacion/requerimientosFuncionales.html')">↳
                 Requerimientos Funcionales</button></li>
-            <li><button onclick="loadSection('./componentes/documentacion/objetivos.html')">↳ Objetivo general y especificos</button></li>
-            <li><button onclick="loadSection('./componentes/documentacion/matrizTrazabilidad.html')">↳ Matriz de trazabilidad</button></li>
+            <li><button onclick="loadSection('./componentes/documentacion/tecnologias.html')">↳ Tecnologias</button>
+            </li>
+
+            <li><button onclick="loadSection('./componentes/documentacion/matrizTrazabilidad.html')">↳ Matriz de
+                trazabilidad</button></li>
+            <li><button onclick="loadSection('./componentes/documentacion/manualTecnico.html')">↳ Manual
+                tecnico</button></li>
+            <li><button onclick="loadSection('./componentes/documentacion/manualUsuario.html')">↳ Manual de
+                usuario</button></li>
+
+
+
           </ul>
         </details>
       </li>
