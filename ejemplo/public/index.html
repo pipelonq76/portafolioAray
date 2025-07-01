@@ -4,8 +4,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portafolio SPA con Node.js</title>
+  <title>Portafolio Aray</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" href="img/logoAray.png" type="image/x-icon">
   <style>
     body {
       overflow-x: hidden;
@@ -91,7 +92,7 @@
   <div class="p-4 bg-morado text-white flex items-center justify-between fixed w-full z-30">
     <div class="flex items-center gap-3">
       <img src="img/logoAray.png" alt="Logo" class="w-10 h-10 rounded-full">
-      <span class="text-xl font-semibold">Mi Portafolio</span>
+      <span class="text-xl font-semibold">Portafolio Aray</span>
     </div>
     <button id="menu-toggle" class="md:hidden">
       <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -108,17 +109,6 @@
         <button onclick="loadSection('inicio.html')" class="w-full text-left font-medium hover:text-morado">
           🏠 Inicio
         </button>
-      </li>
-
-      <li class="group">
-        <details>
-          <summary class="cursor-pointer font-medium hover:text-morado">💼 Servicios (Portafolio)</summary>
-          <ul class="pl-4 mt-2 space-y-1 text-sm text-gray-700">
-            <li><button onclick="loadSection('frontend.html')">↳ Desarrollo Frontend</button></li>
-            <li><button onclick="loadSection('soporte.html')">↳ Soporte Técnico</button></li>
-            <li><button onclick="loadSection('diseno.html')">↳ Diseño UX/UI</button></li>
-          </ul>
-        </details>
       </li>
 
       <li class="group">
@@ -147,10 +137,25 @@
         <details>
           <summary class="cursor-pointer font-medium hover:text-morado">📄 Documentación Técnica</summary>
           <ul class="pl-4 mt-2 space-y-1 text-sm text-gray-700">
+            <li><button onclick="loadSection('./componentes/documentacion/problematica.html')">↳ Problematica</button>
+            </li>
+            <li><button onclick="loadSection('./componentes/documentacion/solucion.html')">↳ Solución</button></li>
+            <li><button onclick="loadSection('./componentes/documentacion/objetivos.html')">↳ Objetivo general y
+                especificos</button></li>
             <li><button onclick="loadSection('./componentes/documentacion/requerimientosFuncionales.html')">↳
                 Requerimientos Funcionales</button></li>
-            <li><button onclick="loadSection('./componentes/documentacion/objetivos.html')">↳ Objetivo general y especificos</button></li>
-            <li><button onclick="loadSection('./componentes/documentacion/matrizTrazabilidad.html')">↳ Matriz de trazabilidad</button></li>
+            <li><button onclick="loadSection('./componentes/documentacion/tecnologias.html')">↳ Tecnologias</button>
+            </li>
+
+            <li><button onclick="loadSection('./componentes/documentacion/matrizTrazabilidad.html')">↳ Matriz de
+                trazabilidad</button></li>
+            <li><button onclick="loadSection('./componentes/documentacion/manualTecnico.html')">↳ Manual
+                tecnico</button></li>
+            <li><button onclick="loadSection('./componentes/documentacion/manualUsuario.html')">↳ Manual de
+                usuario</button></li>
+
+
+
           </ul>
         </details>
       </li>
@@ -159,8 +164,8 @@
         <details>
           <summary class="cursor-pointer font-medium hover:text-morado">📞 Contacto</summary>
           <ul class="pl-4 mt-2 space-y-1 text-sm text-gray-700">
-            <li><button onclick="loadSection('formulario.html')">↳ Formulario de contacto</button></li>
-            <li><button onclick="loadSection('redes.html')">↳ Redes sociales (simuladas)</button></li>
+            <li><button onclick="loadSection('./componentes/contacto/contacto.html')">↳ Información de contacto</button>
+            </li>
           </ul>
         </details>
       </li>

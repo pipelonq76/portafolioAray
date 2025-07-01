@@ -5,45 +5,147 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Requerimientos | Servicio de Mudanzas</title>
   <script src="https://cdn.tailwindcss.com"></script>
-
 </head>
 <body class="bg-gray-100 text-black">
 
-
-
-  <!-- Main Content -->
-  <main class="max-w-4xl mx-auto pt-8 pb-12 px-4">
+  <main class="max-w-4xl mx-auto pt-1 pb-12 px-4">
     <h1 class="text-3xl font-bold text-morado mb-6 text-center">Requerimientos del Proyecto</h1>
 
     <section class="mb-10">
       <h2 class="text-2xl font-semibold text-morado mb-3">Requerimientos Funcionales</h2>
-      <ul class="list-disc pl-6 space-y-2 text-black">
-        <li>Registro para usuario y conductor.</li>
-        <li>Sesión de información adicional (Sobre nosotros).</li>
-        <li>Menús intuitivos.</li>
-        <li>Agenda de fechas y horarios para mudanzas.</li>
-        <li>Función de geolocalización.</li>
-        <li>Función de trazado de rutas.</li>
-        <li>Sistema de protección de navegación en la aplicación.</li>
-        <li>Información verificada del conductor encargado del acarreo.</li>
-        <li>Función de restablecimiento de contraseñas.</li>
-        <li>Diseño responsive.</li>
-        <li>Página index con la información principal.</li>
-        <li>Apartado del conductor para verificar su histórico de acarreos.</li>
-        <li>A la hora de realizar la mudanza/acarreo el usuario podrá ingresar un comentario.</li>
+      <ul class="space-y-3 text-black">
+        <li class="flex items-start gap-3">
+          <!-- Icono usuario -->
+          <svg class="h-6 w-6 text-morado flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A9 9 0 1112 21a9 9 0 01-6.879-3.196z"/></svg>
+          <span>Registro para usuario y conductor.</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <!-- Icono info -->
+          <svg class="h-6 w-6 text-morado flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01"/></svg>
+          <span>Sesión de información adicional (Sobre nosotros).</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <!-- Icono menú -->
+          <svg class="h-6 w-6 text-morado flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          <span>Menús intuitivos.</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <!-- Icono calendario -->
+          <svg class="h-6 w-6 text-morado flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          <span>Agenda de fechas y horarios para mudanzas.</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <!-- Icono ubicación -->
+          <svg class="h-6 w-6 text-morado flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c1.657 0 3-1.343 3-3S13.657 5 12 5 9 6.343 9 8s1.343 3 3 3z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 22s8-4.5 8-10a8 8 0 10-16 0c0 5.5 8 10 8 10z"/></svg>
+          <span>Función de geolocalización.</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <!-- Icono ruta -->
+          <svg class="h-6 w-6 text-morado flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A2 2 0 013 15.382V6.618a2 2 0 011.553-1.894L9 2m0 0l6 3m-6-3v18m6-15l5.447 2.724A2 2 0 0121 8.618v8.764a2 2 0 01-1.553 1.894L15 22m0 0V4"/></svg>
+          <span>Función de trazado de rutas.</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <!-- Icono escudo -->
+          <svg class="h-6 w-6 text-morado flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 1l9 4-1 9-8 8-8-8-1-9 9-4z"/></svg>
+          <span>Sistema de protección de navegación en la aplicación.</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <!-- Icono info -->
+          <svg class="h-6 w-6 text-morado flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01"/></svg>
+          <span>Información verificada del conductor encargado del acarreo.</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <!-- Icono llave -->
+          <svg class="h-6 w-6 text-morado flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.403 4.207A2 2 0 0116.618 24H7.382a2 2 0 01-1.979-2.793L4 17h5m6-6V7a2 2 0 00-2-2H9a2 2 0 00-2 2v4m10 4h-4"/></svg>
+          <span>Función de restablecimiento de contraseñas.</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <!-- Icono dispositivo movil -->
+          <svg class="h-6 w-6 text-morado flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 1v22m8-4H4a2 2 0 01-2-2V5a2 2 0 012-2h16a2 2 0 012 2v14a2 2 0 01-2 2z"/></svg>
+          <span>Diseño responsive.</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <!-- Icono pagina inicio -->
+          <svg class="h-6 w-6 text-morado flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7-2 2m-7 7l-7 7-2-2m18-18l2 2m0 0l-7 7-7-7 2-2m7 7l7 7-2 2-7-7z"/></svg>
+          <span>Página index con la información principal.</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <!-- Icono historial -->
+          <svg class="h-6 w-6 text-morado flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V7m-9 5h4m-2-2v4m-4-4v4m-2-4v4m-4-4v4"/></svg>
+          <span>Apartado del conductor para verificar su histórico de acarreos.</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <!-- Icono comentario -->
+          <svg class="h-6 w-6 text-morado flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h18a2 2 0 012 2v12a2 2 0 01-2 2H3a2 2 0 01-2-2V5a2 2 0 012-2zm0 0l9 9m0 0l9-9"/></svg>
+          <span>A la hora de realizar la mudanza/acarreo el usuario podrá ingresar un comentario.</span>
+        </li>
       </ul>
     </section>
 
     <section>
       <h2 class="text-2xl font-semibold text-morado mb-3">Requerimientos No Funcionales</h2>
-      <ul class="list-disc pl-6 space-y-2 text-black">
-        <li>Sistema de valoración de usuarios.</li>
-        <li>El color predominante de la aplicación será el morado</li>
-        <li>Los iconos que se muestran en la aplicación deberán tener relación con el propósito de aray</li>
-        <li>Información corta en el footer</li>
-        <li>El registro deberá ser llamativo para los usuarios</li>
-        <li>Encriptación de contraseñas y validaciones de formularios.</li>
-        <li>Documentación técnica y de usuario accesible.</li>
+      <ul class="space-y-3 text-black">
+        <li class="flex items-start gap-3">
+          <!-- Icono estrella -->
+          <svg class="h-6 w-6 text-morado flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l2.286 7.057a1 1 0 00.95.69h7.462c.969 0 1.371 1.24.588 1.81l-6.034 4.386a1 1 0 00-.364 1.118l2.286 7.057c.3.921-.755 1.688-1.54 1.118l-6.034-4.386a1 1 0 00-1.176 0l-6.034 4.386c-.784.57-1.838-.197-1.54-1.118l2.286-7.057a1 1 0 00-.364-1.118L2.049 12.484c-.783-.57-.38-1.81.588-1.81h7.462a1 1 0 00.95-.69l2.286-7.057z"/>
+          </svg>
+          <span>Sistema de valoración de usuarios.</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <!-- Icono paleta de colores -->
+          <svg class="h-6 w-6 text-morado flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" stroke-width="2"/>
+            <circle cx="7.5" cy="10.5" r="1.5"/>
+            <circle cx="16.5" cy="10.5" r="1.5"/>
+            <circle cx="12" cy="16.5" r="1.5"/>
+          </svg>
+          <span>El color predominante de la aplicación será el morado.</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <!-- Icono cuadrícula -->
+          <svg class="h-6 w-6 text-morado flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <rect width="6" height="6" x="3" y="3" rx="1" stroke-width="2"/>
+            <rect width="6" height="6" x="15" y="3" rx="1" stroke-width="2"/>
+            <rect width="6" height="6" x="3" y="15" rx="1" stroke-width="2"/>
+            <rect width="6" height="6" x="15" y="15" rx="1" stroke-width="2"/>
+          </svg>
+          <span>Los iconos que se muestran en la aplicación deberán tener relación con el propósito de aray.</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <!-- Icono info -->
+          <svg class="h-6 w-6 text-morado flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M13 16h-1v-4h-1m1-4h.01"/>
+          </svg>
+          <span>Información corta en el footer.</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <!-- Icono registro/plus -->
+          <svg class="h-6 w-6 text-morado flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 4v16m8-8H4"/>
+          </svg>
+          <span>El registro deberá ser llamativo para los usuarios.</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <!-- Icono candado -->
+          <svg class="h-6 w-6 text-morado flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <rect width="18" height="11" x="3" y="11" rx="2" stroke-width="2"/>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M7 11V7a5 5 0 0110 0v4"/>
+          </svg>
+          <span>Encriptación de contraseñas y validaciones de formularios.</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <!-- Icono documento -->
+          <svg class="h-6 w-6 text-morado flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M7 8h10M7 12h4m-2 8a9 9 0 110-18 9 9 0 010 18z"/>
+          </svg>
+          <span>Documentación técnica y de usuario accesible.</span>
+        </li>
       </ul>
     </section>
   </main>
