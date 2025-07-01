@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Costos del Proyecto - App de Mudanzas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100 flex items-center justify-center min-h-screen">
+    <div class="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-2xl">
+        <h1 class="text-3xl font-extrabold text-purple-600 text-center mb-6">Costos Mensuales - App de Mudanzas</h1>
+        <p class="text-gray-600 text-center mb-8">Desglose de costos con y sin la API de Google Maps (en COP)</p>
+
+
+        <br>
+        <br>
+        <!-- Tabla de costos -->
+        <div class="overflow-x-auto">
+            <table class="w-full border-collapse">
+                <thead>
+                    <tr class="bg-purple-100">
+                        <th class="px-4 py-3 text-left text-sm font-semibold text-gray-800">Categoría</th>
+                        <th class="px-4 py-3 text-right text-sm font-semibold text-gray-800">Sin API Google Maps</th>
+                        <th class="px-4 py-3 text-right text-sm font-semibold text-gray-800">Con API Google Maps</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="border-b border-gray-200 hover:bg-gray-50">
+                        <td class="px-4 py-3 text-gray-700">Hosting (Hostinger)</td>
+                        <td class="px-4 py-3 text-right text-gray-700">$31,000</td>
+                        <td class="px-4 py-3 text-right text-gray-700">$31,000</td>
+                    </tr>
+                    <tr class="border-b border-gray-200 hover:bg-gray-50">
+                        <td class="px-4 py-3 text-gray-700">Certificado SSL</td>
+                        <td class="px-4 py-3 text-right text-gray-700">$4,167</td>
+                        <td class="px-4 py-3 text-right text-gray-700">$4,167</td>
+                    </tr>
+                    <tr class="border-b border-gray-200 hover:bg-gray-50">
+                        <td class="px-4 py-3 text-gray-700">Dominio</td>
+                        <td class="px-4 py-3 text-right text-gray-700">$3,333</td>
+                        <td class="px-4 py-3 text-right text-gray-700">$3,333</td>
+                    </tr>
+                    <tr class="border-b border-gray-200 hover:bg-gray-50">
+                        <td class="px-4 py-3 text-gray-700">API Google Maps</td>
+                        <td class="px-4 py-3 text-right text-gray-700">$0</td>
+                        <td class="px-4 py-3 text-right text-red-600 font-semibold">$800,000</td>
+                    </tr>
+                    <tr class="bg-gray-100 font-bold">
+                        <td class="px-4 py-3 text-gray-800">Total</td>
+                        <td class="px-4 py-3 text-right text-gray-800">$38,500</td>
+                        <td class="px-4 py-3 text-right text-purple-600">$838,500</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
